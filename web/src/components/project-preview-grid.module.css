@@ -1,19 +1,6 @@
 @import '../styles/custom-media.css';
 @import '../styles/custom-properties.css';
 
-.root {
-  margin: 2em 0 4em;
-}
-
-.headline {
-  font-size: var(--font-micro-size);
-  line-height: var(--font-micro-line-height);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin: 2rem 0;
-}
-
 .grid {
   margin: 0;
   padding: 0;
@@ -23,11 +10,11 @@
   grid-gap: 2em;
 
   @media (--media-min-small) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   @media (--media-min-medium) {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 }
 

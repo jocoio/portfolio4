@@ -1,4 +1,3 @@
-const {isFuture} = require('date-fns')
 /**
  * Implement Gatsby's Node APIs in this file.
  *
@@ -9,11 +8,11 @@ async function createProjectPages (graphql, actions, reporter) {
   const {createPage} = actions
   const result = await graphql(`
     {
-      allSanitySampleProject(filter: {slug: {current: {ne: null}}, publishedAt: {ne: null}}) {
+      allSanityProject(filter: {slug: {current: {ne: null}}, launchDate: {ne: null}}) {
         edges {
           node {
             id
-            publishedAt
+            launchDate
             slug {
               current
             }
@@ -25,10 +24,9 @@ async function createProjectPages (graphql, actions, reporter) {
 
   if (result.errors) throw result.errors
 
-  const projectEdges = (result.data.allSanitySampleProject || {}).edges || []
+  const projectEdges = (result.data.allSanityProject || {}).edges || []
 
   projectEdges
-    .filter(edge => !isFuture(edge.node.publishedAt))
     .forEach(edge => {
       const id = edge.node.id
       const slug = edge.node.slug.current

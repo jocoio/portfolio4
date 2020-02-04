@@ -10,16 +10,18 @@
   box-sizing: border-box;
   margin: 0 auto;
   max-width: 960px;
-  padding: 1em;
-  display: flex;
+
+  @nest & h1 {
+    margin-bottom: 20px;
+  }
 
   @media (--media-min-small) {
-    padding: 1.5em 1.5em;
+
   }
 }
 
 .branding {
-  font-weight: 600;
+  font-weight: 900;
   flex: 1;
 
   @nest & a {

@@ -13,12 +13,12 @@ export function filterOutDocsWithoutSlugs ({slug}) {
   return (slug || {}).current
 }
 
-export function filterOutDocsPublishedInTheFuture ({publishedAt}) {
-  return !isFuture(publishedAt)
+export function filterOutDocsPublishedInTheFuture ({launchDate}) {
+  return !isFuture(launchDate)
 }
 
-export function getBlogUrl (publishedAt, slug) {
-  return `/blog/${format(publishedAt, 'YYYY/MM')}/${slug.current || slug}/`
+export function getBlogUrl (launchDate, slug) {
+  return `/blog/${format(launchDate, 'YYYY/MM')}/${slug.current || slug}/`
 }
 
 export function buildImageObj (source) {

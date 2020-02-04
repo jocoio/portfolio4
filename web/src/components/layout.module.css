@@ -1,6 +1,37 @@
 @import '../styles/custom-media.css';
 @import '../styles/custom-properties.css';
 
+/* Non-mobile */
+@media (min-width: 768px) {
+  
+  .root {
+    display: flex;
+  }
+
+  .wrapper {
+    margin-left: 200px;
+    padding: 75px 75px 75px 50px;
+    max-width: 700px;
+  
+    @nest {
+      margin-bottom: 200px;
+    }
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .wrapper {
+    padding: 10px;
+    max-width: 700px;
+  
+    @nest {
+      margin-bottom: 200px;
+    }
+  }
+}
+
+
 .content {
   background: var(--color-white);
   min-height: calc(100% - 73px - 120px);

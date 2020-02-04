@@ -4,10 +4,6 @@
   text-decoration: none;
 }
 
-.title {
-  composes: responsiveTitle1 from './typography.module.css';
-}
-
 .leadMediaThumb {
   position: relative;
   padding-bottom: 66.666%;
@@ -32,11 +28,11 @@
 }
 
 .excerpt {
-  @nest & p {
-    margin: 0.5em 0;
-  }
 
-  @nest & strong {
-    font-weight: 600;
+  @nest & p {
+    margin: 0;
+    font-size: var(--font-h2-size);
+    font-weight: 700;
+    letter-spacing: -0.5px;
   }
 }

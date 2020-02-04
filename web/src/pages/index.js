@@ -7,21 +7,57 @@ import {
 } from '../lib/helpers'
 import Container from '../components/container'
 import GraphQLErrorList from '../components/graphql-error-list'
+import Intro from '../components/intro'
+import Experience from '../components/experience'
 import ProjectPreviewGrid from '../components/project-preview-grid'
 import SEO from '../components/seo'
 import Layout from '../containers/layout'
+import ScrollMagic from 'scrollmagic'
+import {TweenMax, TimelineMax} from 'gsap'
+import {ScrollMagicPluginGsap} from 'scrollmagic-plugin-gsap'
+
+ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
 
 export const query = graphql`
   query IndexPageQuery {
+    spotify:  allSpotifyRecentTrack(
+      limit: 1
+      sort: { fields: order }
+    ) {
+      edges {
+        node {
+          track {
+            name
+            artists {
+              name
+            }
+          }
+          played_at
+        }
+      }
+    }
     site: sanitySiteSettings(_id: {regex: "/(drafts.|)siteSettings/"}) {
       title
+      intro_title
+      intro_subtitle
       description
       keywords
     }
-    projects: allSanitySampleProject(
-      limit: 6
-      sort: {fields: [publishedAt], order: DESC}
-      filter: {slug: {current: {ne: null}}, publishedAt: {ne: null}}
+    experience: allSanityExperience(
+      limit: 5
+      sort: {fields: [startDate], order: DESC}
+    ) {
+      edges {
+        node {
+          title
+          company
+        }
+      }
+    }
+    projects: allSanityProject(
+      limit: 20
+      sort: {fields: [launchDate], order: DESC}
+      filter: {slug: {current: {ne: null}}, launchDate: {ne: null}}
     ) {
       edges {
         node {
@@ -76,6 +112,12 @@ const IndexPage = props => {
       .filter(filterOutDocsWithoutSlugs)
       .filter(filterOutDocsPublishedInTheFuture)
     : []
+  const experienceNodes = (data || {}).experience
+    ? mapEdgesToNodes(data.experience)
+    : []
+  const spotifyNodes = (data || {}).spotify
+    ? mapEdgesToNodes(data.spotify)
+    : []
 
   if (!site) {
     throw new Error(
@@ -84,16 +126,15 @@ const IndexPage = props => {
   }
 
   return (
-    <Layout>
+    <Layout nodes={spotifyNodes}>
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
-        <h1 hidden>Welcome to {site.title}</h1>
+        <Intro intro_title={site.intro_title} intro_subtitle={site.intro_subtitle} />
+        {experienceNodes && (
+          <Experience nodes={experienceNodes} />
+        )}
         {projectNodes && (
-          <ProjectPreviewGrid
-            title='Latest projects'
-            nodes={projectNodes}
-            browseMoreHref='/archive/'
-          />
+          <ProjectPreviewGrid nodes={projectNodes} />
         )}
       </Container>
     </Layout>
