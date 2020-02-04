@@ -20,6 +20,25 @@ ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
 
 export const query = graphql`
   query IndexPageQuery {
+    instagram: allInstaNode(
+      limit: 1
+      sort: {fields: [timestamp], order: DESC}
+    ) {
+      edges{
+        node {
+          id
+          likes
+          comments
+          timestamp
+          caption
+          thumbnails {
+            src
+            config_width
+            config_height
+          }
+        }
+      }
+    }
     spotify:  allSpotifyRecentTrack(
       limit: 1
       sort: { fields: order }
@@ -107,17 +126,26 @@ const IndexPage = props => {
   }
 
   const site = (data || {}).site
+
   const projectNodes = (data || {}).projects
     ? mapEdgesToNodes(data.projects)
       .filter(filterOutDocsWithoutSlugs)
       .filter(filterOutDocsPublishedInTheFuture)
     : []
+
   const experienceNodes = (data || {}).experience
     ? mapEdgesToNodes(data.experience)
     : []
+
   const spotifyNodes = (data || {}).spotify
     ? mapEdgesToNodes(data.spotify)
     : []
+
+  const instagramNodes = (data || {}).instagram
+    ? mapEdgesToNodes(data.instagram)
+    : []
+
+  console.log(instagramNodes[0].thumbnails[4].src)
 
   if (!site) {
     throw new Error(
@@ -126,7 +154,7 @@ const IndexPage = props => {
   }
 
   return (
-    <Layout nodes={spotifyNodes}>
+    <Layout spotyNodes={spotifyNodes} instaNodes={instagramNodes}>
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
         <Intro intro_title={site.intro_title} intro_subtitle={site.intro_subtitle} />

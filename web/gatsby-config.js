@@ -22,6 +22,14 @@ module.exports = {
       }
     },
     {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        useMozJpeg: false,
+        stripMetadata: true,
+        defaultQuality: 75
+      }
+    },
+    {
       resolve: `gatsby-source-spotify`,
       options: {
         clientId: `d2d9970dba2a4563be82f0d340829b61`,
@@ -31,6 +39,12 @@ module.exports = {
         fetchPlaylists: true, // optional. Set to false to disable fetching of your playlists
         fetchRecent: true, // optional. Set to false to disable fetching of your recently played tracks
         timeRanges: ['short_term', 'medium_term', 'long_term'] // optional. Set time ranges to be fetched
+      }
+    },
+    {
+      resolve: `gatsby-source-instagram`,
+      options: {
+        username: `joco.io`
       }
     }
   ]

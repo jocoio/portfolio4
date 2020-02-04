@@ -14,8 +14,6 @@ const Nav = (props) => (
         <div className={styles.last}>
           <h6>Last Listen</h6>
           <p>{props.recent_song.track.name} by {props.recent_song.track.artists[0].name}</p>
-          {console.log('Recent song')}
-          {console.log(props.recent_song)}
         </div>
         <div className={styles.last}>
           <h6>Last Read</h6>
@@ -27,7 +25,9 @@ const Nav = (props) => (
         </div>
         <div className={styles.last}>
           <h6>Last Shot</h6>
-          <img src='https://picsum.photos/50/50' />
+          <a href='https://instagram.com/joco.io/'>
+            <img src={props.recent_pic.thumbnails[0].src} />
+          </a>
         </div>
       </div>
     </div>
