@@ -12,6 +12,11 @@ export default {
       name: 'year',
       type: 'number',
       title: 'Year'
+    },
+    {
+      name: 'viewDate',
+      type: 'datetime',
+      title: 'View Date'
     }
   ]
 }

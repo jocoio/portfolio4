@@ -57,6 +57,7 @@ export const query = graphql`
     }
     book: allSanityBook(
       limit: 1
+      sort: {fields: [finishDate], order: DESC}
     ) {
       edges {
         node {
@@ -78,6 +79,7 @@ export const query = graphql`
     }
     movie: allSanityMovie(
       limit: 1
+      sort: {fields: [viewDate], order: DESC}
     ) {
       edges {
         node {
@@ -162,8 +164,8 @@ const IndexPage = props => {
     : []
 
   const movieNodes = (data || {}).movie
-  ? mapEdgesToNodes(data.movie)
-  : []
+    ? mapEdgesToNodes(data.movie)
+    : []
 
   const spotifyNodes = (data || {}).spotify
     ? mapEdgesToNodes(data.spotify)

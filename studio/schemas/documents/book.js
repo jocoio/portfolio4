@@ -10,8 +10,13 @@ export default {
     },
     {
       name: 'author',
-      type: 'text',
+      type: 'string',
       title: 'Author'
+    },
+    {
+      name: 'finishDate',
+      type: 'datetime',
+      title: 'Finish Date'
     }
   ]
 }
