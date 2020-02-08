@@ -13,20 +13,20 @@ const Nav = (props) => (
       <div className={styles.lasts}>
         <div className={styles.last}>
           <h6>Last Listen</h6>
-          <p>{props.recent_song.track.name} by {props.recent_song.track.artists[0].name}</p>
+          <p>{props.last_song.track.name} by {props.last_song.track.artists[0].name}</p>
         </div>
         <div className={styles.last}>
           <h6>Last Read</h6>
-          <p>Find Me by André Aciman</p>
+          <p>{props.last_book.title} by {props.last_book.author}</p>
         </div>
         <div className={styles.last}>
           <h6>Last Watch</h6>
-          <p>Parasite, 2019 </p>
+          <p>{props.last_movie.title}, {props.last_movie.year}</p>
         </div>
         <div className={styles.last}>
           <h6>Last Shot</h6>
           <a href='https://instagram.com/joco.io/'>
-            <img src={props.recent_pic.thumbnails[0].src} />
+            <img src={props.last_pic.thumbnails[0].src} />
           </a>
         </div>
       </div>

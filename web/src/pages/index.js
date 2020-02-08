@@ -55,12 +55,15 @@ export const query = graphql`
         }
       }
     }
-    site: sanitySiteSettings(_id: {regex: "/(drafts.|)siteSettings/"}) {
-      title
-      intro_title
-      intro_subtitle
-      description
-      keywords
+    book: allSanityBook(
+      limit: 1
+    ) {
+      edges {
+        node {
+          title
+          author
+        }
+      }
     }
     experience: allSanityExperience(
       limit: 5
@@ -72,6 +75,23 @@ export const query = graphql`
           company
         }
       }
+    }
+    movie: allSanityMovie(
+      limit: 1
+    ) {
+      edges {
+        node {
+          title
+          year
+        }
+      }
+    }
+    site: sanitySiteSettings(_id: {regex: "/(drafts.|)siteSettings/"}) {
+      title
+      intro_title
+      intro_subtitle
+      description
+      keywords
     }
     projects: allSanityProject(
       limit: 20
@@ -137,6 +157,14 @@ const IndexPage = props => {
     ? mapEdgesToNodes(data.experience)
     : []
 
+  const bookNodes = (data || {}).book
+    ? mapEdgesToNodes(data.book)
+    : []
+
+  const movieNodes = (data || {}).movie
+  ? mapEdgesToNodes(data.movie)
+  : []
+
   const spotifyNodes = (data || {}).spotify
     ? mapEdgesToNodes(data.spotify)
     : []
@@ -145,8 +173,6 @@ const IndexPage = props => {
     ? mapEdgesToNodes(data.instagram)
     : []
 
-  console.log(instagramNodes[0].thumbnails[4].src)
-
   if (!site) {
     throw new Error(
       'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
@@ -154,7 +180,7 @@ const IndexPage = props => {
   }
 
   return (
-    <Layout spotyNodes={spotifyNodes} instaNodes={instagramNodes}>
+    <Layout spotyNodes={spotifyNodes} instaNodes={instagramNodes} bookNodes={bookNodes} movieNodes={movieNodes}>
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
         <Intro intro_title={site.intro_title} intro_subtitle={site.intro_subtitle} />
