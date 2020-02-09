@@ -19,14 +19,6 @@
   }
 }
 
-.title {
-  @media (hover: hover) {
-    @nest .root:hover & {
-      text-decoration: underline;
-    }
-  }
-}
-
 .excerpt {
 
   @nest & p {

@@ -3,7 +3,8 @@ module.exports = {
   rules: {
     'react/prop-types': 0,
     'object-curly-spacing': ['error', 'never'],
-    'camelcase': 'off'
+    'camelcase': 'off',
+    'padded-blocks': 'off'
   },
   settings: {
     react: {
