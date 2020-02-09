@@ -20,7 +20,8 @@ const ProjectPreview = (props) => {
     height: '200px',
     transition: 'opacity 150ms ease-in-out',
     marginLeft: photoCoordinates[0] + 'px',
-    marginTop: photoCoordinates[1] + 'px'
+    marginTop: photoCoordinates[1] + 'px',
+    pointerEvents: 'none'
   }
 
   const handleMouseEnter = (e) => {
