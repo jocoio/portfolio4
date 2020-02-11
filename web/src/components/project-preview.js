@@ -1,6 +1,5 @@
-import {Link} from 'gatsby'
+// import {Link} from 'gatsby'
 import React, {useState} from 'react'
-import BlockText from './block-text'
 import {buildImageObj} from '../lib/helpers'
 import {imageUrlFor} from '../lib/image-url'
 
@@ -52,22 +51,16 @@ const ProjectPreview = (props) => {
           style={tooltipStyle}
         />
       )}
-      <Link
+      <h2
         className={styles.root}
-        to={`/project/${props.slug.current}`}
+        to={`/project/${props.slug}`}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onMouseMove={handleMouseMove}
       >
-        {props._rawExcerpt && (
-          <div className={styles.excerpt}>
-            <BlockText blocks={props._rawExcerpt} />
-          </div>
-        )}
-        <h3>{props.subtitle}</h3>
-      </Link>
+        {props.excerpt}
+      </h2>
     </div>
-
   )
 }
 

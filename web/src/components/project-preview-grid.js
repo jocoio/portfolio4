@@ -33,6 +33,8 @@ function ProjectPreviewGrid (props) {
       .addTo(scrollMagicController)
   }, [])
 
+  console.log(props)
+
   return (
     <div className={styles.root}>
       <h6 id='imade' className={styles.headline}>I made</h6>

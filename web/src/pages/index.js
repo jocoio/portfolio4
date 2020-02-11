@@ -103,6 +103,8 @@ export const query = graphql`
       edges {
         node {
           id
+          title
+          excerpt
           mainImage {
             crop {
               _key
@@ -125,8 +127,6 @@ export const query = graphql`
             }
             alt
           }
-          title
-          _rawExcerpt
           slug {
             current
           }

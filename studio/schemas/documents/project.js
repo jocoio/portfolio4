@@ -13,7 +13,7 @@ export default {
     {
       name: 'excerpt',
       title: 'Excerpt',
-      type: 'simplePortableText'
+      type: 'string'
     },
     {
       name: 'slug',
