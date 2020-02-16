@@ -1,11 +1,14 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import ProjectPreview from './project-preview'
 import ScrollMagic from 'scrollmagic'
 import {TimelineMax} from 'gsap'
 import styles from './project-preview-grid.module.css'
+import $ from 'jquery'
 
 function ProjectPreviewGrid (props) {
   let grid = useRef([])
+
+  const [photoCoordinates, setPhotoCoordinates] = useState([0, 0])
 
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
@@ -33,16 +36,21 @@ function ProjectPreviewGrid (props) {
       .addTo(scrollMagicController)
   }, [])
 
-  console.log(props)
+  const handleMouseMove = (e) => {
+    e.preventDefault()
+    var x = e.clientX + 20
+    var y = e.clientY
+    setPhotoCoordinates([x, y])
+  }
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} onMouseMove={handleMouseMove} id='projects'>
       <h6 id='imade' className={styles.headline}>I made</h6>
       <ul className={styles.grid}>
         {props.nodes &&
           props.nodes.map((node, i) => (
             <li key={node.id} ref={element => { grid.current[i] = element }}>
-              <ProjectPreview {...node} />
+              <ProjectPreview {...node} coords={photoCoordinates} />
             </li>
           ))}
       </ul>

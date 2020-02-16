@@ -8,18 +8,17 @@ import styles from './project-preview.module.css'
 const ProjectPreview = (props) => {
 
   const [showPreview, setShowPreview] = useState(false)
-  const [photoCoordinates, setPhotoCoordinates] = useState([0, 0])
 
   const tooltipStyle = {
     opacity: showPreview ? 0.9 : 0,
     visibility: showPreview ? 'visible' : 'hidden',
-    position: 'absolute',
+    position: 'fixed',
     backgroundColor: '#222222',
-    width: '250px',
-    height: '250px',
+    width: '200px',
+    height: '200px',
     transition: 'opacity 150ms ease-in-out',
-    marginLeft: photoCoordinates[0] + 'px',
-    marginTop: photoCoordinates[1] + 'px',
+    left: props.coords[0] + 'px',
+    top: props.coords[1] + 'px',
     pointerEvents: 'none'
   }
 
@@ -29,14 +28,6 @@ const ProjectPreview = (props) => {
 
   const handleMouseLeave = (e) => {
     setShowPreview(false)
-  }
-
-  const handleMouseMove = (e) => {
-    e.preventDefault()
-    var rect = e.target.getBoundingClientRect()
-    var x = e.clientX - rect.left + 20
-    var y = e.clientY - rect.top
-    setPhotoCoordinates([x, y])
   }
 
   return (
@@ -59,7 +50,6 @@ const ProjectPreview = (props) => {
             // to={`/project/${props.slug}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            onMouseMove={handleMouseMove}
           >
             {props.excerpt}
           </h2>
@@ -71,7 +61,6 @@ const ProjectPreview = (props) => {
           // to={`/project/${props.slug}`}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          onMouseMove={handleMouseMove}
         >
           {props.excerpt}
         </h2>
