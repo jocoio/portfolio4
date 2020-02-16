@@ -104,6 +104,7 @@ export const query = graphql`
         node {
           id
           title
+          link
           excerpt
           mainImage {
             crop {

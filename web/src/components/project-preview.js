@@ -15,8 +15,8 @@ const ProjectPreview = (props) => {
     visibility: showPreview ? 'visible' : 'hidden',
     position: 'absolute',
     backgroundColor: '#222222',
-    width: '200px',
-    height: '200px',
+    width: '250px',
+    height: '250px',
     transition: 'opacity 150ms ease-in-out',
     marginLeft: photoCoordinates[0] + 'px',
     marginTop: photoCoordinates[1] + 'px',
@@ -49,17 +49,33 @@ const ProjectPreview = (props) => {
             .url()}
           alt={props.mainImage.alt}
           style={tooltipStyle}
+          className={styles.tooltip}
         />
       )}
-      <h2
-        className={styles.root}
-        to={`/project/${props.slug}`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onMouseMove={handleMouseMove}
-      >
-        {props.excerpt}
-      </h2>
+      {props.link && (
+        <a href={props.link} target='_blank'>
+          <h2
+            className={styles.root}
+            // to={`/project/${props.slug}`}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onMouseMove={handleMouseMove}
+          >
+            {props.excerpt}
+          </h2>
+        </a>
+      )}
+      {!props.link && (
+        <h2
+          className={styles.root}
+          // to={`/project/${props.slug}`}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onMouseMove={handleMouseMove}
+        >
+          {props.excerpt}
+        </h2>
+      )}
     </div>
   )
 }

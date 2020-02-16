@@ -9,7 +9,7 @@ import Container from './container'
 import styles from './project.module.css'
 
 function Project (props) {
-  const {_rawBody, title, categories, mainImage, launchDate, relatedProjects} = props
+  const {_rawBody, title, mainImage, launchDate, relatedProjects} = props
   return (
     <article className={styles.root}>
       {props.mainImage && mainImage.asset && (
@@ -36,16 +36,6 @@ function Project (props) {
                 {differenceInDays(new Date(launchDate), new Date()) > 3
                   ? distanceInWords(new Date(launchDate), new Date())
                   : format(new Date(launchDate), 'MMMM Do YYYY')}
-              </div>
-            )}
-            {categories && categories.length > 0 && (
-              <div className={styles.categories}>
-                <h3 className={styles.categoriesHeadline}>Categories</h3>
-                <ul>
-                  {categories.map(category => (
-                    <li key={category._id}>{category.title}</li>
-                  ))}
-                </ul>
               </div>
             )}
             {relatedProjects && relatedProjects.length > 0 && (
