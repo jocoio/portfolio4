@@ -45,3 +45,46 @@ async function createProjectPages (graphql, actions, reporter) {
 exports.createPages = async ({graphql, actions, reporter}) => {
   await createProjectPages(graphql, actions, reporter)
 }
+
+const Path = require('path')
+
+exports.onCreateWebpackConfig = ({
+  stage,
+  rules,
+  loaders,
+  plugins,
+  actions
+}) => {
+  actions.setWebpackConfig({
+    module: {
+      rules: stage === 'build-html'
+        ? [
+          {
+            test: /ScrollMagic/,
+            use: loaders.null()
+          }
+        ]
+        : []
+    },
+    resolve: {
+      alias: {
+        TimelineMax: Path.resolve(
+          'node_modules',
+          'gsap/src/uncompressed/TimelineMax.js'
+        ),
+        ScrollMagic: Path.resolve(
+          'node_modules',
+          'scrollmagic/scrollmagic/uncompressed/ScrollMagic.js'
+        ),
+        'animation.gsap': Path.resolve(
+          'node_modules',
+          'scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js'
+        ),
+        'debug.addIndicators': Path.resolve(
+          'node_modules',
+          'scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js'
+        )
+      }
+    }
+  })
+}
