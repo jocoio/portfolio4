@@ -3,7 +3,6 @@ import ProjectPreview from './project-preview'
 import ScrollMagic from 'scrollmagic'
 import {TimelineMax} from 'gsap'
 import styles from './project-preview-grid.module.css'
-import $ from 'jquery'
 
 function ProjectPreviewGrid (props) {
   let grid = useRef([])
@@ -12,28 +11,31 @@ function ProjectPreviewGrid (props) {
 
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
-    // Controller
-    var scrollMagicController = new ScrollMagic.Controller()
 
-    // Timeline
-    var projectsTl = new TimelineMax()
+    if (typeof window !== `undefined`) {
+      // Controller
+      var scrollMagicController = new ScrollMagic.Controller()
 
-    // Animation
-    projectsTl.staggerFrom(
-      grid.current,
-      0.75,
-      {opacity: 0},
-      0.15)
+      // Timeline
+      var projectsTl = new TimelineMax()
 
-    // Screne
-    var projScene = new ScrollMagic.Scene({
-      triggerElement: '#imade',
-      offset: 0
-    })
+      // Animation
+      projectsTl.staggerFrom(
+        grid.current,
+        0.75,
+        {opacity: 0},
+        0.15)
 
-    projScene
-      .setTween(projectsTl)
-      .addTo(scrollMagicController)
+      // Screne
+      var projScene = new ScrollMagic.Scene({
+        triggerElement: '#imade',
+        offset: 0
+      })
+
+      projScene
+        .setTween(projectsTl)
+        .addTo(scrollMagicController)
+    }
   }, [])
 
   const handleMouseMove = (e) => {
