@@ -12,30 +12,29 @@ function ProjectPreviewGrid (props) {
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
 
-    if (typeof window !== `undefined`) {
-      // Controller
-      var scrollMagicController = new ScrollMagic.Controller()
+    // Controller
+    var scrollMagicController = new ScrollMagic.Controller()
 
-      // Timeline
-      var projectsTl = new TimelineMax()
+    // Timeline
+    var projectsTl = new TimelineMax()
 
-      // Animation
-      projectsTl.staggerFrom(
-        grid.current,
-        0.75,
-        {opacity: 0},
-        0.15)
+    // Animation
+    projectsTl.staggerFrom(
+      grid.current,
+      0.75,
+      {opacity: 0},
+      0.15)
 
-      // Screne
-      var projScene = new ScrollMagic.Scene({
-        triggerElement: '#imade',
-        offset: 0
-      })
+    // Screne
+    var projScene = new ScrollMagic.Scene({
+      triggerElement: '#imade',
+      offset: 0
+    })
 
-      projScene
-        .setTween(projectsTl)
-        .addTo(scrollMagicController)
-    }
+    projScene
+      .setTween(projectsTl)
+      .addTo(scrollMagicController)
+
   }, [])
 
   const handleMouseMove = (e) => {

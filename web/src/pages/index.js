@@ -16,9 +16,7 @@ import ScrollMagic from 'scrollmagic'
 import {TweenMax, TimelineMax} from 'gsap'
 import {ScrollMagicPluginGsap} from 'scrollmagic-plugin-gsap'
 
-if (typeof window !== `undefined`) {
-  ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
-}
+ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
 
 export const query = graphql`
   query IndexPageQuery {

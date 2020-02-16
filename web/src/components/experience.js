@@ -8,30 +8,30 @@ function Experience (props) {
 
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
-    if (typeof window !== `undefined`) {
-      // Controller
-      var scrollMagicController2 = new ScrollMagic.Controller()
 
-      // Timeline
-      var experienceTl = new TimelineMax()
+    // Controller
+    var scrollMagicController2 = new ScrollMagic.Controller()
 
-      // Animation
-      experienceTl.staggerFrom(
-        grid.current,
-        0.75,
-        {opacity: 0},
-        0.15)
+    // Timeline
+    var experienceTl = new TimelineMax()
 
-      // Scene
-      var expScene = new ScrollMagic.Scene({
-        triggerElement: '#iworkedas',
-        offset: 0
-      })
+    // Animation
+    experienceTl.staggerFrom(
+      grid.current,
+      0.75,
+      {opacity: 0},
+      0.15)
 
-      expScene
-        .setTween(experienceTl)
-        .addTo(scrollMagicController2)
-    }
+    // Scene
+    var expScene = new ScrollMagic.Scene({
+      triggerElement: '#iworkedas',
+      offset: 0
+    })
+
+    expScene
+      .setTween(experienceTl)
+      .addTo(scrollMagicController2)
+
   }, [])
 
   return (
