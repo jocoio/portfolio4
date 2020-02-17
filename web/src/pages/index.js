@@ -184,8 +184,6 @@ const IndexPage = props => {
     )
   }
 
-  console.log(spotifyNodes)
-
   return (
     <Layout spotyNodes={spotifyNodes} instaNodes={instagramNodes} bookNodes={bookNodes} movieNodes={movieNodes}>
       <SEO title={site.title} description={site.description} keywords={site.keywords} />

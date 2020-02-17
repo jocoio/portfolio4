@@ -22,6 +22,12 @@ module.exports = {
       }
     },
     {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        icon: 'src/images/favicon.png'
+      }
+    },
+    {
       resolve: `gatsby-plugin-sharp`,
       options: {
         useMozJpeg: false,
