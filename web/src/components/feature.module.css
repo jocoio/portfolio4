@@ -1,0 +1,24 @@
+@import '../styles/custom-media.css';
+@import '../styles/custom-properties.css';
+
+.ytp-show-cards-title {
+  display: none;
+}
+
+@media (--media-min-large) {  
+  .player {
+    height: 360px;
+  }
+}
+
+@media (--media-max-medium) {  
+  .player {
+    height: 240px;
+  }
+}
+
+@media (--media-max-small) {
+  .player {
+    height: 175px;
+  }
+}

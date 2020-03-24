@@ -8,6 +8,7 @@ import {
 import Container from '../components/container'
 import GraphQLErrorList from '../components/graphql-error-list'
 import Intro from '../components/intro'
+import Feature from '../components/feature'
 import Experience from '../components/experience'
 import ProjectPreviewGrid from '../components/project-preview-grid'
 import SEO from '../components/seo'
@@ -189,6 +190,7 @@ const IndexPage = props => {
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
         <Intro intro_title={site.intro_title} intro_subtitle={site.intro_subtitle} />
+        <Feature />
         {experienceNodes && (
           <Experience nodes={experienceNodes} />
         )}
