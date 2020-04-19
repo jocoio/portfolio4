@@ -102,6 +102,7 @@ p {
 
 a {
   color: var(--black);
+  text-decoration: none;
   padding: 0;
 }
 

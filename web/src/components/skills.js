@@ -1,9 +1,9 @@
 import React, {useEffect, useRef} from 'react'
-import styles from './experience.module.css'
+import styles from './skills.module.css'
 import ScrollMagic from 'scrollmagic'
 import {TimelineMax} from 'gsap'
 
-function Experience (props) {
+function Skills (props) {
   let grid = useRef([])
 
   // Similar to componentDidMount and componentDidUpdate:
@@ -24,7 +24,7 @@ function Experience (props) {
 
     // Scene
     var expScene = new ScrollMagic.Scene({
-      triggerElement: '#iworkedas',
+      triggerElement: '#skillstitle',
       offset: 0
     })
 
@@ -35,14 +35,18 @@ function Experience (props) {
   }, [])
 
   return (
-    <div className={styles.root}>
-      <div className={styles.wrapper}>
-        <h6 id='iworkedas'>Experience</h6>
+    <div>
+
+      <h6 id='skillstitle'>Skills</h6>
+      <div className={styles.container}>
         {props.nodes &&
           props.nodes.map((node, i) => (
-            <div className={styles.chunk} key={i} ref={element => { grid.current[i] = element }}>
-              <h2>{node.title}</h2>
-              <a href={node.link}><h3>{node.company}</h3></a>
+            <div className={styles.catcol}>
+              <h4 className={styles.category}>{node.title}</h4>
+              <div className={styles.line} ref={element => { grid.current[i] = element }} key={i} />
+              {node.list.map((skill) => (
+                <p>{skill}</p>
+              ))}
             </div>
           ))
         }
@@ -51,4 +55,4 @@ function Experience (props) {
   )
 }
 
-export default Experience
+export default Skills

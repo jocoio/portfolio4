@@ -10,6 +10,7 @@ import GraphQLErrorList from '../components/graphql-error-list'
 import Intro from '../components/intro'
 import Feature from '../components/feature'
 import Experience from '../components/experience'
+import Skills from '../components/skills'
 import ProjectPreviewGrid from '../components/project-preview-grid'
 import SEO from '../components/seo'
 import Layout from '../containers/layout'
@@ -58,14 +59,13 @@ export const query = graphql`
         }
       }
     }
-    book: allSanityBook(
+    trip: allSanityTrip(
       limit: 1
-      sort: {fields: [finishDate], order: DESC}
+      sort: {fields: [date], order: DESC}
     ) {
       edges {
         node {
-          title
-          author
+          location
         }
       }
     }
@@ -77,6 +77,7 @@ export const query = graphql`
         node {
           title
           company
+          link
         }
       }
     }
@@ -97,6 +98,19 @@ export const query = graphql`
       intro_subtitle
       description
       keywords
+    }
+    skill: allSanitySkill(
+      limit: 15
+    ) {
+      edges {
+        node {
+          title
+          category {
+            title
+          }
+          list
+        }
+      }
     }
     projects: allSanityProject(
       limit: 20
@@ -163,12 +177,16 @@ const IndexPage = props => {
     ? mapEdgesToNodes(data.experience)
     : []
 
-  const bookNodes = (data || {}).book
-    ? mapEdgesToNodes(data.book)
+  const tripNodes = (data || {}).trip
+    ? mapEdgesToNodes(data.trip)
     : []
 
   const movieNodes = (data || {}).movie
     ? mapEdgesToNodes(data.movie)
+    : []
+
+  const skillNodes = (data || {}).skill
+    ? mapEdgesToNodes(data.skill)
     : []
 
   const spotifyNodes = (data || {}).spotify
@@ -186,14 +204,17 @@ const IndexPage = props => {
   }
 
   return (
-    <Layout spotyNodes={spotifyNodes} instaNodes={instagramNodes} bookNodes={bookNodes} movieNodes={movieNodes}>
+    <Layout spotyNodes={spotifyNodes} instaNodes={instagramNodes} tripNodes={tripNodes} movieNodes={movieNodes}>
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
         <Intro intro_title={site.intro_title} intro_subtitle={site.intro_subtitle} />
-        <Feature />
         {experienceNodes && (
           <Experience nodes={experienceNodes} />
         )}
+        {skillNodes && (
+          <Skills nodes={skillNodes} />
+        )}
+        <Feature />
         {projectNodes && (
           <ProjectPreviewGrid nodes={projectNodes} />
         )}

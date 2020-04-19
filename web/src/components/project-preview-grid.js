@@ -46,7 +46,7 @@ function ProjectPreviewGrid (props) {
 
   return (
     <div className={styles.root} onMouseMove={handleMouseMove} onMouseOver={handleMouseMove} id='projects'>
-      <h6 id='imade' className={styles.headline}>I made</h6>
+      <h6 id='imade' className={styles.headline}>All work</h6>
       <ul className={styles.grid}>
         {props.nodes &&
           props.nodes.map((node, i) => (

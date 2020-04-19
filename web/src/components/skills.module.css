@@ -1,0 +1,21 @@
+@import '../styles/custom-media.css';
+@import '../styles/custom-properties.css';
+
+.catcol {
+  margin-right: 30px;
+}
+
+.container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.category {
+  margin: 0;
+}
+
+.line {
+  background-color: black;
+  height: 5px;
+  margin-bottom: 19px;
+}

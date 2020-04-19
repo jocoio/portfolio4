@@ -15,13 +15,18 @@ export default {
     },
     {
       name: 'startDate',
-      title: 'Start Date',
-      type: 'datetime'
+      type: 'datetime',
+      title: 'Start Date'
     },
     {
       name: 'endDate',
-      title: 'End Date',
-      type: 'datetime'
+      type: 'datetime',
+      title: 'End Date'
+    },
+    {
+      name: 'link',
+      type: 'string',
+      title: 'Link'
     }
   ]
 }
