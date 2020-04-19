@@ -30,6 +30,23 @@
   --font-h5-line-height: calc(18 / var(--unit) * 1.5rem);
   --font-h6-line-height: calc(14 / var(--unit) * 1.5rem);
   --font-p-line-height: calc(16 / var(--unit) * 1.5rem);
+
+  --red: #F67258; 
+  --blue: #4370B1;
+  --green: #3EAE42;
+  --yellow: #FDCE50;
+}
+
+:global(.design) {
+  background-color: var(--red);
+}
+
+:global(.code) {
+  background-color: var(--blue);
+}
+
+:global(.creative) {
+  background-color: var(--green);
 }
 
 html {

@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react'
 import ProjectPreview from './project-preview'
 import ScrollMagic from 'scrollmagic'
 import {TimelineMax} from 'gsap'
-import styles from './project-preview-grid.module.css'
+import styles from './projects.module.css'
 
 function ProjectPreviewGrid (props) {
   let grid = useRef([])

@@ -42,7 +42,7 @@ function Experience (props) {
           props.nodes.map((node, i) => (
             <div className={styles.chunk} key={i} ref={element => { grid.current[i] = element }}>
               <h2>{node.title}</h2>
-              <a href={node.link}><h3>{node.company}</h3></a>
+              <a href={node.link} target='_blank'><h3>{node.company}</h3></a>
             </div>
           ))
         }

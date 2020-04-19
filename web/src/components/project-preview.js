@@ -45,25 +45,27 @@ const ProjectPreview = (props) => {
       )}
       {props.link && (
         <a href={props.link} target='_blank'>
-          <h2
+          <div
             className={styles.root}
             // to={`/project/${props.slug}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            {props.excerpt}
-          </h2>
+            <h2>{props.title}</h2>
+            <h3>{props.excerpt}</h3>
+          </div>
         </a>
       )}
       {!props.link && (
-        <h2
+        <div
           className={styles.root}
           // to={`/project/${props.slug}`}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          {props.excerpt}
-        </h2>
+          <h2>{props.title}</h2>
+          <h3>{props.excerpt}</h3>
+        </div>
       )}
     </div>
   )

@@ -3,19 +3,26 @@
 
 .catcol {
   margin-right: 30px;
+
+  @nest & div {
+    height: 6px;
+    margin-bottom: 19px;
+    width: 0px;
+  }
+
+  @nest & p {
+    margin-bottom: 10px;
+    font-size: 19px;
+  }
 }
 
 .container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+  opacity: 0;
 }
 
 .category {
   margin: 0;
-}
-
-.line {
-  background-color: black;
-  height: 5px;
-  margin-bottom: 19px;
+  width: min-content;
 }
