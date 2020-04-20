@@ -39,14 +39,17 @@
 
 :global(.design) {
   background-color: var(--red);
+  color: var(--red);
 }
 
 :global(.code) {
   background-color: var(--blue);
+  color: var(--blue);
 }
 
 :global(.creative) {
   background-color: var(--green);
+  color: var(--green);
 }
 
 html {

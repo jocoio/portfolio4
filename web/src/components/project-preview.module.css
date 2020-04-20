@@ -3,14 +3,30 @@
   color: inherit;
   text-decoration: none;
   cursor: default;
+
+  @nest & h3 {
+    margin-bottom: 15px;
+  }
+
+  @nest & h6 {
+    border: 2px solid;
+    background-color: initial;
+    border-radius: 5px;
+    width: min-content;
+    white-space: nowrap;
+    padding: 5px 8px 4px 8px;
+    font-size: 12px;
+    display: inline-block;
+    letter-spacing: 0.3px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
 }
 
 /* Non mobile */
 @media (min-width: 768px) {
-  a {
-    @nest & .root {
-      cursor: pointer;
-    }
+  a.root {
+    cursor: pointer;
   }
 }
 
@@ -18,5 +34,10 @@
 @media (max-width: 767px) {
   .tooltip {
     display: none;
+  }
+
+  .arrow {
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 }

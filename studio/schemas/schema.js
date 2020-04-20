@@ -12,6 +12,7 @@ import person from './documents/person'
 import project from './documents/project'
 import siteSettings from './documents/siteSettings'
 import skill from './documents/skill'
+import tag from './documents/tag'
 import trip from './documents/trip'
 
 // Object types
@@ -35,8 +36,7 @@ export default createSchema({
     projectMember,
     projectPortableText,
     simplePortableText,
-    // The following are document types which will appear
-    // in the studio.
+    // Document types which will appear in the studio.
     category,
     experience,
     movie,
@@ -44,6 +44,7 @@ export default createSchema({
     project,
     siteSettings,
     skill,
+    tag,
     trip
   ])
 })

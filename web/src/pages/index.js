@@ -58,7 +58,7 @@ export const query = graphql`
           played_at
         }
       }
-    }
+    },
     trip: allSanityTrip(
       limit: 1
       sort: {fields: [date], order: DESC}
@@ -122,7 +122,13 @@ export const query = graphql`
           id
           title
           link
-          excerpt
+          description
+          skills {
+            name
+            category {
+              title
+            }
+          }
           mainImage {
             crop {
               _key

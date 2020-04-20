@@ -6,6 +6,7 @@
 
   @nest & div {
     height: 6px;
+    margin-top: 1px;
     margin-bottom: 19px;
     width: 0px;
   }
@@ -25,4 +26,11 @@
 .category {
   margin: 0;
   width: min-content;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .catcol > p {
+    font-size: 15px;
+  }
 }

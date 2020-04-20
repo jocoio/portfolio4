@@ -7,11 +7,11 @@ import styles from './project-preview.module.css'
 
 const ProjectPreview = (props) => {
 
-  const [showPreview, setShowPreview] = useState(false)
+  const [showInfo, setshowInfo] = useState(false)
 
   const tooltipStyle = {
-    opacity: showPreview ? 0.9 : 0,
-    visibility: showPreview ? 'visible' : 'hidden',
+    opacity: showInfo ? 0.9 : 0,
+    visibility: showInfo ? 'visible' : 'hidden',
     position: 'fixed',
     backgroundColor: '#222222',
     width: '200px',
@@ -22,12 +22,18 @@ const ProjectPreview = (props) => {
     pointerEvents: 'none'
   }
 
+  const arrowStyle = {
+    opacity: showInfo ? 1 : 0,
+    visibility: showInfo ? 'visible' : 'hidden',
+    transition: 'opacity 150ms ease-in-out'
+  }
+
   const handleMouseEnter = (e) => {
-    setShowPreview(true)
+    setshowInfo(true)
   }
 
   const handleMouseLeave = (e) => {
-    setShowPreview(false)
+    setshowInfo(false)
   }
 
   return (
@@ -44,16 +50,20 @@ const ProjectPreview = (props) => {
         />
       )}
       {props.link && (
-        <a href={props.link} target='_blank'>
-          <div
-            className={styles.root}
-            // to={`/project/${props.slug}`}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            <h2>{props.title}</h2>
-            <h3>{props.excerpt}</h3>
-          </div>
+        <a
+          className={styles.root}
+          // to={`/project/${props.slug}`}
+          href={props.link}
+          target='_blank'
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <h2>{props.title} <span className={styles.arrow} style={arrowStyle}>↗</span></h2>
+          <h3>{props.description}</h3>
+          {props.skills &&
+            props.skills.map((tag, i) => (
+              <h6 className={tag.category.title} key={i}>{tag.name}</h6>
+            ))}
         </a>
       )}
       {!props.link && (
@@ -64,7 +74,11 @@ const ProjectPreview = (props) => {
           onMouseLeave={handleMouseLeave}
         >
           <h2>{props.title}</h2>
-          <h3>{props.excerpt}</h3>
+          <h3>{props.description}</h3>
+          {props.skills &&
+              props.skills.map((tag, i) => (
+                <h6 className={tag.category.title} key={i}>{tag.name}</h6>
+              ))}
         </div>
       )}
     </div>

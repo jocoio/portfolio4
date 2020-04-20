@@ -24,7 +24,7 @@ export const query = graphql`
             alt
           }
           title
-          excerpt
+          description
         }
       }
     }

@@ -14,12 +14,11 @@ function Skills (props) {
 
     // Timeline
     var skillsTl = new TimelineMax()
+    var catdivs = document.getElementsByClassName(styles.category)
 
-    console.log(document.getElementsByClassName(styles.category)[0].offsetWidth)
-
-    var oneWidth = document.getElementsByClassName(styles.category)[0].offsetWidth
-    var twoWidth = document.getElementsByClassName(styles.category)[1].offsetWidth
-    var threeWidth = document.getElementsByClassName(styles.category)[2].offsetWidth
+    var oneWidth = catdivs[0].offsetWidth
+    var twoWidth = catdivs[1].offsetWidth
+    var threeWidth = catdivs[2].offsetWidth
 
     skillsTl
       .to(grid.current[0], 0.4, {opacity: 1}, 0) // Fade skills in

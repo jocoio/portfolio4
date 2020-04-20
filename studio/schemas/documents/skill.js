@@ -1,7 +1,7 @@
 export default {
   name: 'skill',
   type: 'document',
-  title: 'Skill',
+  title: 'Skills',
   fields: [
     {
       name: 'title',

@@ -11,9 +11,19 @@ export default {
       type: 'string'
     },
     {
-      name: 'excerpt',
-      title: 'Excerpt',
+      name: 'description',
+      title: 'Description',
       type: 'string'
+    },
+    {
+      name: 'skills',
+      type: 'array',
+      title: 'Skills',
+      description: 'Add keywords that describes your portfolio.',
+      of: [{type: 'reference', to: {type: 'tag'}}],
+      options: {
+        layout: 'tags'
+      }
     },
     {
       name: 'link',
@@ -24,7 +34,6 @@ export default {
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      description: 'Some frontend will require a slug to be set to be able to show the project',
       options: {
         source: 'title',
         maxLength: 96
@@ -58,15 +67,6 @@ export default {
       launchDate: 'launchDate',
       slug: 'slug',
       media: 'mainImage'
-    },
-    prepare ({title = 'No title', launchDate, slug = {}, media}) {
-      const dateSegment = format(launchDate, 'YYYY/MM')
-      const path = `/${dateSegment}/${slug.current}/`
-      return {
-        title,
-        media,
-        subtitle: launchDate ? path : 'Missing publishing date'
-      }
     }
   }
 }
