@@ -41,7 +41,7 @@ export default {
           },
           {
             title: 'Frontend',
-            value: 'https://portfolio4-web.netlify.com',
+            value: 'https://portfolio4-web.netlify.app',
             category: 'apps'
           }
         ]
