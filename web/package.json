@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "Jon Corbett <joco.hello@gmail.com>",
   "scripts": {
-    "build": "gatsby build && netlify-lambda build functions",
+    "build": "gatsby build",
     "clean-cache": "gatsby clean",
     "dev": "npm run clean-cache && gatsby develop",
     "lint": "eslint .",
