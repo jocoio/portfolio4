@@ -23,29 +23,23 @@ if (typeof window !== `undefined`) {
 }
 
 export const query = graphql`
-  query IndexPageQuery {
+  query {
     instagram: allInstaNode(
       limit: 1
       sort: {fields: [timestamp], order: DESC}
     ) {
       edges{
         node {
-          id
-          likes
-          comments
           timestamp
-          caption
           thumbnails {
             src
-            config_width
-            config_height
           }
         }
       }
     }
     spotify:  allSpotifyRecentTrack(
       limit: 1
-      sort: { fields: order }
+      sort: {order: DESC, fields: played_at}
     ) {
       edges {
         node {
@@ -162,6 +156,8 @@ export const query = graphql`
 
 const IndexPage = props => {
   const {data, errors} = props
+
+  console.log(data)
 
   if (errors) {
     return (

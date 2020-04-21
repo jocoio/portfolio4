@@ -17,7 +17,7 @@ module.exports = {
       options: {
         ...clientConfig.sanity,
         token,
-        watchMode: !isProd,
+        watchMode: true,
         overlayDrafts: !isProd && token
       }
     },
@@ -42,9 +42,9 @@ module.exports = {
         clientSecret: `a53021acdb8c4d9b88e1bbf68ae1ccd2`,
         refreshToken: `AQCOJknbhci-usCGcQcHkyySPjqRzNB9CIrdXFvpcQlNSLUcxSfLhKvc_WfpWwt7fp-opn2tJdWZLAQXFJBu9nX4OZqK1a2jcvxHnSqPBvRlOHHTVHkKzbddIuNtGcUCe60`,
 
-        fetchPlaylists: true, // optional. Set to false to disable fetching of your playlists
+        fetchPlaylists: false, // optional. Set to false to disable fetching of your playlists
         fetchRecent: true, // optional. Set to false to disable fetching of your recently played tracks
-        timeRanges: ['short_term', 'medium_term', 'long_term'] // optional. Set time ranges to be fetched
+        timeRanges: ['short_term'] // optional. Set time ranges to be fetched
       }
     },
     {
