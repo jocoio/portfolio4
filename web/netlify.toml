@@ -1,2 +1,2 @@
 [build]
-  functions = "./web/functions"
+  functions = "./functions"
