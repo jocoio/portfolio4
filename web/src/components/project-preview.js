@@ -58,7 +58,7 @@ const ProjectPreview = (props) => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <h2>{props.title} <span className={styles.arrow} style={arrowStyle}>↗</span></h2>
+          <h2>{props.title} <span className={styles.arrow} style={arrowStyle}>↗&#xFE0E;</span></h2>
           <h3>{props.description}</h3>
           {props.skills &&
             props.skills.map((tag, i) => (
