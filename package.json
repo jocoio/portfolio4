@@ -6,6 +6,7 @@
     "build": "lerna run build --parallel",
     "dev": "lerna run dev --parallel",
     "format": "lerna run format",
+    "build-lambda": "netlify-lambda build ",
     "build-studio": "(cd studio && npm run build)",
     "build-web": "lerna bootstrap && (cd studio && SANITY_AUTH_TOKEN=$SANITY_DEPLOY_STUDIO_TOKEN npm run graphql-deploy) && (cd web && npm run build)",
     "graphql-deploy": "lerna run graphql-deploy",
@@ -17,7 +18,9 @@
     "lerna": "^3.20.2"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "gsap": "^3.1.1",
+    "netlify-lambda": "^1.6.3",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   }

@@ -11,7 +11,7 @@ const ProjectPreview = (props) => {
 
   const tooltipStyle = {
     opacity: showInfo ? 0.9 : 0,
-    visibility: showInfo ? 'visible' : 'hidden',
+    visibility: showInfo ? 'hidden' : 'hidden',
     position: 'fixed',
     backgroundColor: '#222222',
     width: '200px',
