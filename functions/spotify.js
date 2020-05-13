@@ -7,8 +7,6 @@ const client_id = 'd2d9970dba2a4563be82f0d340829b61'
 const client_secret = 'a53021acdb8c4d9b88e1bbf68ae1ccd2'
 const REFRESH_TOKEN = 'AQCOJknbhci-usCGcQcHkyySPjqRzNB9CIrdXFvpcQlNSLUcxSfLhKvc_WfpWwt7fp-opn2tJdWZLAQXFJBu9nX4OZqK1a2jcvxHnSqPBvRlOHHTVHkKzbddIuNtGcUCe60'
 
-let token = null
-
 var authOptions = {
   method: 'POST',
   url: AUTH_ENDPOINT,

@@ -17,7 +17,7 @@ import Layout from '../containers/layout'
 import ScrollMagic from 'scrollmagic'
 import {TweenMax, TimelineMax} from 'gsap'
 import {ScrollMagicPluginGsap} from 'scrollmagic-plugin-gsap'
-import fetch from 'node-fetch'
+import axios from 'axios'
 
 if (typeof window !== `undefined`) {
   ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
@@ -58,10 +58,6 @@ const IndexPage = props => {
     ? mapEdgesToNodes(data.skill)
     : []
 
-  const spotifyNodes = (data || {}).spotify
-    ? mapEdgesToNodes(data.spotify)
-    : []
-
   const instagramNodes = (data || {}).instagram
     ? mapEdgesToNodes(data.instagram)
     : []
@@ -72,21 +68,26 @@ const IndexPage = props => {
     )
   }
 
-  const [test, setTest] = useState(null)
+  const dummyData = {
+    name: 'Landslide',
+    artists: [
+      {
+        name: 'Fleetwood Mac'
+      }
+    ]
+  }
+
+  const [spotify, setSpotify] = useState(dummyData)
 
   useEffect(() => {
-    // get data from GitHub api
-    fetch(`https://joco.io/.netlify/functions/spotify`)
-      .then(response => response.json()) // parse JSON from request
-      .then(resultData => {
-        setTest(resultData)
-      }) // set data for the number of stars
+    axios.get(`https://joco.io/.netlify/functions/spotify`)
+      .then(response => { setSpotify(response.items[0].track) })
   }, [])
 
-  console.log(test)
+  console.log(spotify)
 
   return (
-    <Layout spotyNodes={spotifyNodes} instaNodes={instagramNodes} tripNodes={tripNodes} movieNodes={movieNodes}>
+    <Layout spoty={spotify} instaNodes={instagramNodes} tripNodes={tripNodes} movieNodes={movieNodes}>
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
         <Intro intro_title={site.intro_title} intro_subtitle={site.intro_subtitle} />
@@ -109,14 +110,6 @@ export default IndexPage
 
 export const query = graphql`
   query {
-    spotify: allSpotify {
-      edges {
-        node {
-          artist
-          name 
-        }
-      }
-    }
     instagram: allInstaNode(
       limit: 1
       sort: {fields: [timestamp], order: DESC}
