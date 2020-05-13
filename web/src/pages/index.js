@@ -68,24 +68,13 @@ const IndexPage = props => {
     )
   }
 
-  const dummyData = {
-    name: 'Landslide',
-    artists: [
-      {
-        name: 'Fleetwood Mac'
-      }
-    ]
-  }
-
-  const [spotify, setSpotify] = useState(dummyData)
+  const [spotify, setSpotify] = useState(null)
 
   useEffect(() => {
     axios.get(`https://joco.io/.netlify/functions/spotify`)
       .then(response => response.data.items[0].track)
       .then(track => { setSpotify(track) })
   }, [])
-
-  console.log(spotify)
 
   return (
     <Layout spoty={spotify} instaNodes={instagramNodes} tripNodes={tripNodes} movieNodes={movieNodes}>

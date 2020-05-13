@@ -24,7 +24,9 @@ const Nav = (props) => {
         <div className={styles.lasts}>
           <div className={styles.last}>
             <h6>Last Listen</h6>
-            <p>{truncate((props.last_song.name || 'Landslide') + ' by ' + (props.last_song.artists[0].name || 'Fleetwood Mac'))}</p>
+            {props.last_song && props.last_song.name &&
+              <p>{truncate((props.last_song.name || 'Landslide') + ' by ' + (props.last_song.artists[0].name || 'Fleetwood Mac'))}</p>
+            }
           </div>
           <div className={styles.last}>
             <h6>Last Trip</h6>
