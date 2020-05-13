@@ -1,5 +1,4 @@
-import React from 'react'
-import {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {graphql} from 'gatsby'
 import {
   mapEdgesToNodes,
@@ -24,8 +23,100 @@ if (typeof window !== `undefined`) {
   ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
 }
 
+const IndexPage = props => {
+  const {data, errors} = props
+
+  if (errors) {
+    return (
+      <Layout>
+        <GraphQLErrorList errors={errors} />
+      </Layout>
+    )
+  }
+
+  const site = (data || {}).site
+
+  const projectNodes = (data || {}).projects
+    ? mapEdgesToNodes(data.projects)
+      .filter(filterOutDocsWithoutSlugs)
+      .filter(filterOutDocsPublishedInTheFuture)
+    : []
+
+  const experienceNodes = (data || {}).experience
+    ? mapEdgesToNodes(data.experience)
+    : []
+
+  const tripNodes = (data || {}).trip
+    ? mapEdgesToNodes(data.trip)
+    : []
+
+  const movieNodes = (data || {}).movie
+    ? mapEdgesToNodes(data.movie)
+    : []
+
+  const skillNodes = (data || {}).skill
+    ? mapEdgesToNodes(data.skill)
+    : []
+
+  const spotifyNodes = (data || {}).spotify
+    ? mapEdgesToNodes(data.spotify)
+    : []
+
+  const instagramNodes = (data || {}).instagram
+    ? mapEdgesToNodes(data.instagram)
+    : []
+
+  if (!site) {
+    throw new Error(
+      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
+    )
+  }
+
+  const [test, setTest] = useState(null)
+
+  useEffect(() => {
+    // get data from GitHub api
+    fetch(`https://joco.io/.netlify/functions/spotify`)
+      .then(response => response.json()) // parse JSON from request
+      .then(resultData => {
+        setTest(resultData)
+      }) // set data for the number of stars
+  }, [])
+
+  console.log(test)
+
+  return (
+    <Layout spotyNodes={spotifyNodes} instaNodes={instagramNodes} tripNodes={tripNodes} movieNodes={movieNodes}>
+      <SEO title={site.title} description={site.description} keywords={site.keywords} />
+      <Container>
+        <Intro intro_title={site.intro_title} intro_subtitle={site.intro_subtitle} />
+        {experienceNodes && (
+          <Experience nodes={experienceNodes} />
+        )}
+        {skillNodes && (
+          <Skills nodes={skillNodes} />
+        )}
+        {/* <Feature /> */}
+        {projectNodes && (
+          <ProjectPreviewGrid nodes={projectNodes} />
+        )}
+      </Container>
+    </Layout>
+  )
+}
+
+export default IndexPage
+
 export const query = graphql`
   query {
+    spotify: allSpotify {
+      edges {
+        node {
+          artist
+          name 
+        }
+      }
+    }
     instagram: allInstaNode(
       limit: 1
       sort: {fields: [timestamp], order: DESC}
@@ -39,22 +130,6 @@ export const query = graphql`
         }
       }
     }
-    spotify:  allSpotifyRecentTrack(
-      limit: 1
-      sort: {order: DESC, fields: played_at}
-    ) {
-      edges {
-        node {
-          track {
-            name
-            artists {
-              name
-            }
-          }
-          played_at
-        }
-      }
-    },
     trip: allSanityTrip(
       limit: 1
       sort: {fields: [date], order: DESC}
@@ -155,84 +230,3 @@ export const query = graphql`
     }
   }
 `
-
-const IndexPage = props => {
-  const {data, errors} = props
-
-  if (errors) {
-    return (
-      <Layout>
-        <GraphQLErrorList errors={errors} />
-      </Layout>
-    )
-  }
-
-  useEffect(() => {
-    fetch('/.netlify/functions/spotify')
-      .then((response) => {
-        return response.text()
-      })
-      .then((r) => {
-        console.log(r)
-      })
-  })
-
-  const site = (data || {}).site
-
-  const projectNodes = (data || {}).projects
-    ? mapEdgesToNodes(data.projects)
-      .filter(filterOutDocsWithoutSlugs)
-      .filter(filterOutDocsPublishedInTheFuture)
-    : []
-
-  const experienceNodes = (data || {}).experience
-    ? mapEdgesToNodes(data.experience)
-    : []
-
-  const tripNodes = (data || {}).trip
-    ? mapEdgesToNodes(data.trip)
-    : []
-
-  const movieNodes = (data || {}).movie
-    ? mapEdgesToNodes(data.movie)
-    : []
-
-  const skillNodes = (data || {}).skill
-    ? mapEdgesToNodes(data.skill)
-    : []
-
-  const spotifyNodes = (data || {}).spotify
-    ? mapEdgesToNodes(data.spotify)
-    : []
-
-  const instagramNodes = (data || {}).instagram
-    ? mapEdgesToNodes(data.instagram)
-    : []
-
-  if (!site) {
-    throw new Error(
-      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
-    )
-  }
-
-  return (
-    <Layout spotyNodes={spotifyNodes} instaNodes={instagramNodes} tripNodes={tripNodes} movieNodes={movieNodes}>
-      <SEO title={site.title} description={site.description} keywords={site.keywords} />
-      <Container>
-        <Intro intro_title={site.intro_title} intro_subtitle={site.intro_subtitle} />
-        {experienceNodes && (
-          <Experience nodes={experienceNodes} />
-        )}
-        {skillNodes && (
-          <Skills nodes={skillNodes} />
-        )}
-        {/* <Feature /> */}
-        {projectNodes && (
-          <ProjectPreviewGrid nodes={projectNodes} />
-        )}
-      </Container>
-    </Layout>
-  )
-}
-
-export default IndexPage

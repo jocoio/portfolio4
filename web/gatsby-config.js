@@ -36,18 +36,6 @@ module.exports = {
       }
     },
     {
-      resolve: `gatsby-source-spotify`,
-      options: {
-        clientId: `d2d9970dba2a4563be82f0d340829b61`,
-        clientSecret: `a53021acdb8c4d9b88e1bbf68ae1ccd2`,
-        refreshToken: `AQCOJknbhci-usCGcQcHkyySPjqRzNB9CIrdXFvpcQlNSLUcxSfLhKvc_WfpWwt7fp-opn2tJdWZLAQXFJBu9nX4OZqK1a2jcvxHnSqPBvRlOHHTVHkKzbddIuNtGcUCe60`,
-
-        fetchPlaylists: false, // optional. Set to false to disable fetching of your playlists
-        fetchRecent: true, // optional. Set to false to disable fetching of your recently played tracks
-        timeRanges: ['short_term'] // optional. Set time ranges to be fetched
-      }
-    },
-    {
       resolve: `gatsby-source-instagram`,
       options: {
         username: `joco.io`

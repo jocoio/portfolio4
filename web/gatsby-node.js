@@ -42,38 +42,28 @@ async function createProjectPages (graphql, actions, reporter) {
 exports.sourceNodes = async ({boundActionCreators}) => {
   const {createNode} = boundActionCreators
 
-  // fetch raw data from the randomuser api
-  const fetchRandomUser = () => axios.get(`https://randomuser.me/api/?results=50`)
+  // fetch raw data from the Spotify api
+  const fetchSpotify = () => axios.get(`https://joco.io/.netlify/functions/spotify`)
   // await for results
-  const res = await fetchRandomUser()
+  const res = await fetchSpotify()
 
   // map into these results and create nodes
-  res.data.results.map((song, i) => {
+  res.data.items.map((song, i) => {
     // Create your node object
     const userNode = {
       // Required fields
       id: `${i}`,
       parent: `__SOURCE__`,
       internal: {
-        type: `RandomUser` // name of the graphQL query --> allRandomUser {}
+        type: `Spotify` // name of the graphQL query --> allSpotify {}
         // contentDigest will be added just after
         // but it is required
       },
       children: [],
 
       // Other fields that you want to query with graphQl
-      gender: song.gender,
-      name: {
-        title: song.name.title,
-        first: song.name.first,
-        last: song.name.last
-      },
-      picture: {
-        large: song.picture.large,
-        medium: song.picture.medium,
-        thumbnail: song.picture.thumbnail
-      }
-      // etc...
+      artist: song.track.artists[0].name,
+      name: song.track.name
     }
 
     // Get content digest of node. (Required field)
@@ -87,8 +77,6 @@ exports.sourceNodes = async ({boundActionCreators}) => {
     // Create node with the gatsby createNode() API
     createNode(userNode)
   })
-
-  return
 }
 
 exports.createPages = async ({graphql, actions, reporter}) => {

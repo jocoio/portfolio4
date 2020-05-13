@@ -11,6 +11,8 @@ const Nav = (props) => {
     }
   };
 
+  console.log(props)
+
   return (
     <div className={styles.root}>
       <div className={styles.wrapper}>
@@ -22,7 +24,7 @@ const Nav = (props) => {
         <div className={styles.lasts}>
           <div className={styles.last}>
             <h6>Last Listen</h6>
-            <p>{truncate(props.last_song.track.name + ' by ' + props.last_song.track.artists[0].name)}</p>
+            <p>{truncate(props.last_song.name + ' by ' + props.last_song.artist)}</p>
           </div>
           <div className={styles.last}>
             <h6>Last Trip</h6>
