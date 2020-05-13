@@ -1,4 +1,5 @@
 import React from 'react'
+import {useEffect} from 'react'
 import {graphql} from 'gatsby'
 import {
   mapEdgesToNodes,
@@ -8,7 +9,7 @@ import {
 import Container from '../components/container'
 import GraphQLErrorList from '../components/graphql-error-list'
 import Intro from '../components/intro'
-import Feature from '../components/feature'
+// import Feature from '../components/feature'
 import Experience from '../components/experience'
 import Skills from '../components/skills'
 import ProjectPreviewGrid from '../components/projects'
@@ -17,6 +18,7 @@ import Layout from '../containers/layout'
 import ScrollMagic from 'scrollmagic'
 import {TweenMax, TimelineMax} from 'gsap'
 import {ScrollMagicPluginGsap} from 'scrollmagic-plugin-gsap'
+import fetch from 'node-fetch'
 
 if (typeof window !== `undefined`) {
   ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
@@ -60,6 +62,15 @@ export const query = graphql`
       edges {
         node {
           location
+        }
+      }
+    }
+    tweet: allSanityTweet(
+      limit: 20
+    ) {
+      edges {
+        node {
+          text
         }
       }
     }
@@ -164,6 +175,16 @@ const IndexPage = props => {
       </Layout>
     )
   }
+
+  useEffect(() => {
+    fetch('/.netlify/functions/spotify')
+      .then((response) => {
+        return response.text()
+      })
+      .then((r) => {
+        console.log(r)
+      })
+  })
 
   const site = (data || {}).site
 

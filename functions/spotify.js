@@ -1,61 +1,47 @@
-// import fetch from 'node-fetch'
-
-const API_ENDPOINT = 'https://api.spotify.com/v1/me/player/recently-played'
-const TOKEN = 'BQA4NTr4m43KDluUV0-6slUKzjA5kfTn7V7gbW0DOoKC6Xo1ipvGch5WVLXXRDRKmG62ySn-Aq1l2RxNQn4gLo4Sj0p6vabhPYO1RbjWm6aI1TnKIscXylw1QAcgjpqM0QGzNZYRNWcwVA8aZZjeVG-7Vg';
-
-// const headers = {
-//   'Accept' : 'application/json',
-//   'Authorization' : 'Bearer BQCTShF6_jRUFez_8_ueUyLzuc3BVqswo55T938bzKnu7_Arge1brGx5eDH5eHsIRmDVIykyOBVou9Bb9NQEJ7KSNdPqpqt1-jehQ6DTiTG8tTDU7ubtxQCLEL1BVUz5CiZJSBMimzcAZmE8PAAYMNz6OQ'
-// }
-
-// exports.handler = (event, context, callback) => {
-//   return fetch(API_ENDPOINT, {headers: headers})
-//     .then(response => response.json())
-//     .then(data => ({
-//       statusCode: 200,
-//       body: data
-//     }))
-//     .catch(error => ({statusCode: 422, body: String(error)}))
-// }
-
 const axios = require("axios")
 const qs = require("qs")
+const request = require("request")
+var querystring = require('querystring')
+
+const AUTH_ENDPOINT = 'https://accounts.spotify.com/api/token'
+const USER_ENDPOINT = 'https://api.spotify.com/v1/me/player/recently-played?limit=1'
+const client_id = 'd2d9970dba2a4563be82f0d340829b61';
+const client_secret = 'a53021acdb8c4d9b88e1bbf68ae1ccd2';
+const REFRESH_TOKEN = 'AQCOJknbhci-usCGcQcHkyySPjqRzNB9CIrdXFvpcQlNSLUcxSfLhKvc_WfpWwt7fp-opn2tJdWZLAQXFJBu9nX4OZqK1a2jcvxHnSqPBvRlOHHTVHkKzbddIuNtGcUCe60'
+
+var authOptions = {
+  method: 'POST',
+  url: AUTH_ENDPOINT,
+  data: querystring.stringify({ 
+    grant_type: 'refresh_token',
+    refresh_token: REFRESH_TOKEN
+  }),
+  headers: {
+    'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64')),
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+} 
+
+
+const getToken = async function(event, context) {
+  const { data } = await axios(authOptions)
+  return data.access_token
+}
 
 exports.handler = async function(event, context) {
-  // // apply our function to the queryStringParameters and assign it to a variable
-  // const API_PARAMS = qs.stringify(event.queryStringParameters)
-  // // Get env var values defined in our Netlify site UI
-  // // TODO: change this
-  // const API_SECRET = "XXXXX";
-  // var REDIRECT_URI = 'http://localhost:8888/app/profile/';
 
-  // TODO: customize your URL
-  // this is secret too, your frontend won't see this
-  // const URL = `https://accounts.spotify.com/authorize?client_id=${API_SECRET}&response_type=code&redirect_uri=${REDIRECT_URI }&scope=user-read-private%20user-read-email&state=34fFs29kd09`;
+  var token = await getToken()
 
-
-  // console.log("Constructed URL is ...", URL)
-
-  try {
-    const { data } = await 
-      axios({
-        method: 'get',
-        url: API_ENDPOINT,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Basic ' + TOKEN // client id and secret from env
-        }
-      })
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify(data),
+  const { data } = await axios({
+    method: 'GET',
+    url: USER_ENDPOINT,
+    headers: {
+      'Authorization': 'Bearer ' + token
     }
-  } catch (error) {
-    const { status, statusText, headers, data } = error.response
-    return {
-      statusCode: error.response.status,
-      body: JSON.stringify({ status, statusText, headers, data }),
-    }
+  })
+
+  return {
+    statusCode: 200,
+    text: JSON.stringify(data)
   }
 }

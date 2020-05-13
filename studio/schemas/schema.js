@@ -5,6 +5,7 @@ import createSchema from 'part:@sanity/base/schema-creator'
 import schemaTypes from 'all:part:@sanity/base/schema-type'
 
 // Document types
+import cat from './documents/cat'
 import category from './documents/category'
 import experience from './documents/experience'
 import movie from './documents/movie'
@@ -14,6 +15,7 @@ import siteSettings from './documents/siteSettings'
 import skill from './documents/skill'
 import tag from './documents/tag'
 import trip from './documents/trip'
+import tweet from './documents/tweet'
 
 // Object types
 import bioPortableText from './objects/bioPortableText'
@@ -37,6 +39,7 @@ export default createSchema({
     projectPortableText,
     simplePortableText,
     // Document types which will appear in the studio.
+    cat,
     category,
     experience,
     movie,
@@ -45,6 +48,7 @@ export default createSchema({
     siteSettings,
     skill,
     tag,
-    trip
+    trip,
+    tweet
   ])
 })
