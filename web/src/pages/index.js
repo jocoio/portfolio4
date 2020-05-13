@@ -64,16 +64,7 @@ export const query = graphql`
           location
         }
       }
-    }
-    tweet: allSanityTweet(
-      limit: 20
-    ) {
-      edges {
-        node {
-          text
-        }
-      }
-    }
+    },
     experience: allSanityExperience(
       limit: 5
       sort: {fields: [startDate], order: DESC}
