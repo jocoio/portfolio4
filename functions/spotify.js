@@ -1,6 +1,4 @@
 const axios = require("axios")
-const qs = require("qs")
-const request = require("request")
 var querystring = require('querystring')
 
 const AUTH_ENDPOINT = 'https://accounts.spotify.com/api/token'
@@ -42,6 +40,6 @@ exports.handler = async function(event, context) {
 
   return {
     statusCode: 200,
-    text: JSON.stringify(data)
+    body: JSON.stringify(data)
   }
 }
