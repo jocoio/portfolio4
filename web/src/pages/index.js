@@ -81,8 +81,8 @@ const IndexPage = props => {
 
   useEffect(() => {
     axios.get(`https://joco.io/.netlify/functions/spotify`)
-      .then(response => console.log(response.data))
-      .then(response => { setSpotify(response.data.items[0].track) })
+      .then(response => response.data.items[0].track)
+      .then(track => { setSpotify(track) })
   }, [])
 
   console.log(spotify)
