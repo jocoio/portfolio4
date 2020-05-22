@@ -33,6 +33,7 @@
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.0",
     "react-player": "^1.15.2",
+    "sanity": "^1.149.7",
     "scrollmagic": "^2.0.7",
     "scrollmagic-plugin-gsap": "^1.0.4"
   },
