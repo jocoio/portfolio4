@@ -30,6 +30,7 @@
   --font-h5-line-height: calc(18 / var(--unit) * 1.5rem);
   --font-h6-line-height: calc(14 / var(--unit) * 1.5rem);
   --font-p-line-height: calc(16 / var(--unit) * 1.5rem);
+  --font-a-line-height: calc(16 / var(--unit) * 1.5rem);
 
   --red: #F67258; 
   --blue: #4370B1;
@@ -121,6 +122,7 @@ p {
 }
 
 a {
+  line-height: var(--font-a-line-height);
   color: var(--black);
   text-decoration: none;
   padding: 0;

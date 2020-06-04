@@ -68,13 +68,21 @@ const IndexPage = props => {
     )
   }
 
-  const [spotify, setSpotify] = useState(null)
+  const [spotify, setSpotify] = useState({})
 
+  // Get latest song from spotify API
   useEffect(() => {
     axios.get(`https://joco.io/.netlify/functions/spotify`)
+      // Pull track object
       .then(response => response.data.items[0].track)
+      // Feed as param into state
       .then(track => { setSpotify(track) })
+      .catch(error => {
+        console.log(error)
+      })
   }, [])
+
+  console.log(spotify)
 
   return (
     <Layout spoty={spotify} instaNodes={instagramNodes} tripNodes={tripNodes} movieNodes={movieNodes}>
