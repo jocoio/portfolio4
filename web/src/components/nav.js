@@ -39,12 +39,12 @@ const Nav = (props) => {
             <h6>Last Watch</h6>
             <p>{truncate(props.last_movie.title + ', ' + props.last_movie.year)}</p>
           </div>
-          <div className={styles.last}>
+          {/* <div className={styles.last}>
             <h6>Last Shot</h6>
             <a href='https://instagram.com/joco.io/'>
               <img src={props.last_pic.thumbnails[0].src} />
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

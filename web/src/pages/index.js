@@ -58,10 +58,6 @@ const IndexPage = props => {
     ? mapEdgesToNodes(data.skill)
     : []
 
-  const instagramNodes = (data || {}).instagram
-    ? mapEdgesToNodes(data.instagram)
-    : []
-
   if (!site) {
     throw new Error(
       'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
@@ -85,7 +81,7 @@ const IndexPage = props => {
   console.log(spotify)
 
   return (
-    <Layout spoty={spotify} instaNodes={instagramNodes} tripNodes={tripNodes} movieNodes={movieNodes}>
+    <Layout spoty={spotify} tripNodes={tripNodes} movieNodes={movieNodes}>
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
         <Intro intro_title={site.intro_title} intro_subtitle={site.intro_subtitle} />
@@ -108,19 +104,6 @@ export default IndexPage
 
 export const query = graphql`
   query {
-    instagram: allInstaNode(
-      limit: 1
-      sort: {fields: [timestamp], order: DESC}
-    ) {
-      edges{
-        node {
-          timestamp
-          thumbnails {
-            src
-          }
-        }
-      }
-    }
     trip: allSanityTrip(
       limit: 1
       sort: {fields: [date], order: DESC}
